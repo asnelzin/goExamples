@@ -14,11 +14,11 @@ func getIP(rw http.ResponseWriter, request *http.Request) {
 	data := map[string]string{
 		"origin": ip,
 	}
-	serializedData, _ := json.Marshal(data)
+	serializedData, _ := json.MarshalIndent(data, "", "    ")
 	rw.Write(serializedData)
 }
 
 func main() {
-	http.HandleFunc("/", getIP)
+	http.HandleFunc("/ip", getIP)
 	http.ListenAndServe(":5000", nil)
 }
